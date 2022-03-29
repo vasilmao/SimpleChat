@@ -125,10 +125,6 @@ bool MasterConversation::IsEnded() {
     return !is_alive_;
 }
 
-int MasterConversation::GetFD() {
-    return companion_fd_;
-}
-
 MasterConversation::~MasterConversation() {
     close(companion_fd_);
     close(socket_fd_);

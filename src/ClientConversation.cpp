@@ -120,10 +120,6 @@ bool ClientConversation::IsEnded() {
     return !is_alive_;
 }
 
-int ClientConversation::GetFD() {
-    return socket_fd_;
-}
-
 ClientConversation::~ClientConversation() {
     close(socket_fd_);
 }

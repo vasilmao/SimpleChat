@@ -8,7 +8,6 @@ class Conversation {
   public:
     virtual void CheckStdin() = 0;
     virtual void CheckInput() = 0;
-    virtual int  GetFD()      = 0;
     virtual ~Conversation()   = 0;
     virtual bool IsEnded()    = 0;
 };
@@ -21,7 +20,6 @@ class MasterConversation : public Conversation {
     MasterConversation(in_port_t port);
     void CheckStdin() override;
     void CheckInput() override;
-    int  GetFD() override;
     ~MasterConversation() override;
     bool IsEnded() override;
 
@@ -39,7 +37,6 @@ class ClientConversation : public Conversation {
     ClientConversation(in_addr_t ip, in_port_t port);
     void CheckStdin() override;
     void CheckInput() override;
-    int  GetFD() override;
     ~ClientConversation() override;
     bool IsEnded() override;
 

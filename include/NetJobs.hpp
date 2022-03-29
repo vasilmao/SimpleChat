@@ -3,6 +3,8 @@
 
 class Conversation;
 
+
+// epoll cycle
 void ConversationCycle(Conversation* conversation);
 
 #endif // NETJOBS_INCLUDE
