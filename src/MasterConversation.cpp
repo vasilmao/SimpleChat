@@ -30,12 +30,12 @@ MasterConversation::MasterConversation(in_port_t port) {
     socklen_t address_len = sizeof(struct sockaddr_in);
 
     if (bind(socket_fd_, (sockaddr*) &address, sizeof(struct sockaddr_in)) != 0) {
-        perror("Can't bind!!\n");
+        perror("Can't bind!!");
         exit(EXIT_FAILURE);
     }
 
     if (listen(socket_fd_, SOMAXCONN) != 0) {
-        perror("Can't listen!!\n");
+        perror("Can't listen!!");
         exit(EXIT_FAILURE);
     }
 

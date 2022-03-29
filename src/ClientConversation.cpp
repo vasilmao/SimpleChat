@@ -15,7 +15,7 @@ ClientConversation::ClientConversation(in_addr_t ip, in_port_t port) {
     socket_fd_ = socket(AF_INET, SOCK_STREAM, 0);
 
     if (socket_fd_ == -1) {
-        perror("Can't create socket!!\n");
+        perror("Can't create socket!!");
         exit(EXIT_FAILURE);
     }
 
@@ -30,8 +30,7 @@ ClientConversation::ClientConversation(in_addr_t ip, in_port_t port) {
     printf("Connecting to master...\n");
 
     if (connect(socket_fd_, (sockaddr*) &address, sizeof(struct sockaddr_in)) != 0) {
-        perror("Can't connect!!\n");
-        printf("%d\n", errno);
+        perror("Can't connect!!");
         exit(EXIT_FAILURE);
     }
 
