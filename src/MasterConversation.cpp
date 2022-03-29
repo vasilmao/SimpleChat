@@ -60,7 +60,7 @@ void MasterConversation::CheckStdin() {
     }
     if (buffer[0] == '\\') {
         if (read_cnt == BUFFER_SIZE) {
-            throw std::runtime_error("command not found"); // too big command or command not found
+            return;
         }
         ParseCommand(buffer, read_cnt);
         return;
