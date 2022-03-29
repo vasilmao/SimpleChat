@@ -115,6 +115,10 @@ void ClientConversation::ParseCommand(char* cmd, size_t cmd_len) {
     }
 }
 
+int ClientConversation::GetFD() {
+    return socket_fd_;
+}
+
 bool ClientConversation::IsEnded() {
     return !is_alive_;
 }

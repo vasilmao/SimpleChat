@@ -121,6 +121,10 @@ void MasterConversation::ParseCommand(char* cmd, size_t cmd_len) {
     }
 }
 
+int MasterConversation::GetFD() {
+    return companion_fd_;
+}
+
 bool MasterConversation::IsEnded() {
     return !is_alive_;
 }
