@@ -66,8 +66,6 @@ void ClientConversation::CheckStdin() {
             break;
         }
     }
-
-    printf("writing to server\n");
 }
 
 void ClientConversation::CheckInput() {
@@ -75,7 +73,8 @@ void ClientConversation::CheckInput() {
     memset(buffer, 0, BUFFER_SIZE + 1);
     int read_cnt = 0;
     while ((read_cnt = read(socket_fd_, buffer, BUFFER_SIZE)) > 0) {
-        write(STDOUT_FILENO, buffer, read_cnt);
+        buffer[read_cnt] = 0;
+        printf("RECEIVED:\n%s", buffer);
         if (buffer[read_cnt - 1] == '\n') {
             break;
         }
@@ -84,7 +83,15 @@ void ClientConversation::CheckInput() {
 
 void ClientConversation::ParseCommand(char* cmd, size_t cmd_len) {
     // get history for example
-    return;
+    if (strncmp(cmd, "\\exit", 5) == 0) {
+        shutdown(socket_fd_, SHUT_RDWR);
+        is_alive_ = false;
+        return;
+    }
+}
+
+bool ClientConversation::IsEnded() {
+    return !is_alive_;
 }
 
 int ClientConversation::GetFD() {

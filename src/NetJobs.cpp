@@ -33,22 +33,16 @@ void ConversationCycle(Conversation* conversation) {
     struct epoll_event events[EVENTS_MAX];
     memset(events, 0, EVENTS_MAX * sizeof(struct epoll_event));
 
-    bool running = true;
-    while (running) {
-        printf("waiting for events...\n");
+    while (!conversation->IsEnded()) {
         int events_cnt = epoll_wait(queue_fd, events, EVENTS_MAX, -1);
-        printf("got events: %d\n", events_cnt);
         for (int i = 0; i < events_cnt; ++i) {
-            printf("event number %d\n", i);
             int cur_fd = events[i].data.fd;
             if (cur_fd == STDIN_FILENO) {
                 conversation->CheckStdin();
             } else {
-                printf("its input!\n");
                 conversation->CheckInput();
             }
         }
-        printf("events ended\n");
     }
 
 }

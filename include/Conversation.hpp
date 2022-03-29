@@ -10,6 +10,7 @@ class Conversation {
     virtual void CheckInput() = 0;
     virtual int  GetFD()      = 0;
     virtual ~Conversation()   = 0;
+    virtual bool IsEnded()    = 0;
 };
 
 void MakeNonBlocking(int fd);
@@ -22,11 +23,13 @@ class MasterConversation : public Conversation {
     void CheckInput() override;
     int  GetFD() override;
     ~MasterConversation() override;
+    bool IsEnded() override;
 
   private:
     void ParseCommand(char* buffer, size_t cmd_len);
 
   private:
+    bool is_alive_ = true;
     int socket_fd_ = -1;
     int companion_fd_ = -1;
 };
@@ -38,11 +41,13 @@ class ClientConversation : public Conversation {
     void CheckInput() override;
     int  GetFD() override;
     ~ClientConversation() override;
+    bool IsEnded() override;
 
   private:
     void ParseCommand(char* buffer, size_t cmd_len);
 
   private:
+    bool is_alive_ = true;
     int socket_fd_ = -1;
 };
 
